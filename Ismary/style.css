@@ -1,0 +1,311 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #c794e5, #7e31a5); /* Degradado suave y romántico */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+    overflow-x: hidden; /* Evita barras de desplazamiento horizontal */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 800px; /* Ancho ajustado para acomodar el carrusel y nuevas secciones */
+    width: 90%; /* Hace que el contenedor sea adaptable */
+    animation: fadeIn 2s ease-out;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    position: relative; /* Importante para el posicionamiento de elementos internos */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: #7a1465; /* Color morado/rosa vibrante */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    animation: slideInLeft 1.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    animation: slideInRight 1.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Estilos para galerías de imágenes FIJAS (top-images, bottom-images) --- */
+.image-gallery {
+    display: flex; /* Flexbox para controlar el contenido */
+    flex-direction: column; /* Apila imagen y texto verticalmente */
+    align-items: center; /* Centra los elementos (imagen y texto) */
+    gap: 10px; /* Espacio entre la imagen y el párrafo */
+    margin: 30px auto; /* Espacio arriba/abajo y centra la galería */
+    max-width: 300px; /* Limita el ancho de la galería */
+}
+
+.image-gallery img {
+    max-width: 100%; /* Asegura que la imagen no se desborde */
+    width: 250px; /* Ancho fijo para las imágenes de galería */
+    height: 180px; /* Altura fija para las imágenes de galería */
+    object-fit: cover; /* Recorta la imagen para llenar el espacio sin distorsionar */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para hover */
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05); /* Agranda la imagen al pasar el mouse */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35); /* Sombra más pronunciada */
+}
+
+.image-gallery p {
+    font-size: 1em; /* Tamaño de fuente para la leyenda */
+    margin: 0; /* Elimina márgenes por defecto del párrafo */
+    color: #555; /* Color más suave para el texto */
+    line-height: 1.4;
+    text-align: center;
+    max-width: 250px; /* Ancho máximo para la leyenda, alineado con la imagen */
+    animation: none; /* Sin animación de entrada para la leyenda */
+}
+
+/* --- Estilos para el CARRUSEL de Imágenes --- */
+.carousel-container {
+    position: relative;
+    width: 100%; /* Ocupa el 100% del contenedor padre (.container) */
+    overflow: hidden; /* ¡CRÍTICO! Oculta las imágenes que están fuera de vista */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 40px 0; /* Espacio arriba y abajo del carrusel */
+    display: flex; /* Añadido para que el carrusel se centre si es necesario */
+    justify-content: center; /* Centra el carrusel horizontalmente */
+    align-items: center; /* Centra el carrusel verticalmente */
+    height: 380px; /* Le damos una altura fija al contenedor del carrusel para el centrado */
+}
+
+.carousel-track {
+    display: flex; /* Pone las imágenes en una fila horizontal */
+    transition: transform 0.5s ease-in-out; /* Animación suave al cambiar de imagen */
+    height: 100%; /* Asegura que el track ocupe toda la altura del container */
+    align-items: center; /* Centra las imágenes verticalmente dentro del track */
+}
+
+.carousel-slide {
+    min-width: 100%; /* Cada slide ocupa el 100% del ancho del carousel-container */
+    flex-shrink: 0; /* Evita que las imágenes se encojan */
+    display: flex; /* Usamos flexbox para centrar la imagen dentro del slide */
+    justify-content: center; /* Centra horizontalmente la imagen */
+    align-items: center; /* Centra verticalmente la imagen */
+    height: 100%; /* Asegura que el slide ocupe toda la altura del track */
+}
+
+.carousel-slide img {
+    max-width: 100%; /* La imagen no se desborda del slide */
+    max-height: 100%; /* La imagen no se desborda del slide */
+    width: auto; /* Permite que el ancho se ajuste automáticamente */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
+    object-fit: contain; /* Muestra la imagen completa, sin recortes */
+    display: block; /* Elimina espacios extra que pueden aparecer */
+    border-radius: 15px; /* Bordes redondeados para la imagen dentro del carrusel */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para centrado vertical */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para las flechas */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    border-radius: 50%; /* Botones circulares */
+    z-index: 10; /* Asegura que los botones estén por encima de las imágenes */
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+/* --- Estilos para la Nueva Sección de "Marcelos de la suerte" --- */
+.marcelos-section {
+    margin-top: 50px; /* Espacio superior para separarlo del carrusel */
+    margin-bottom: 40px; /* Espacio inferior para separarlo del botón */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo suave para la sección */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.marcelos-section p {
+    font-size: 1.1em;
+    color: #7a1465; /* Color del texto, similar al h1 */
+    margin-bottom: 20px; /* Espacio entre el texto y las imágenes */
+    animation: none; /* No aplicar animación de párrafo principal aquí */
+}
+
+.marcelos-images {
+    display: flex; /* Para que las imágenes se coloquen en fila */
+    justify-content: center; /* Centra las imágenes */
+    gap: 30px; /* Espacio entre las imágenes de Marcelo */
+    flex-wrap: wrap; /* Para que se adapten a pantallas pequeñas */
+}
+
+.marcelos-images img {
+    width: 150px; /* Tamaño de las imágenes de Marcelo */
+    height: 150px; /* Tamaño de las imágenes de Marcelo */
+    object-fit: contain; /* Para que se vean completas y no se recorten */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.marcelos-images img:hover {
+    transform: scale(1.1); /* Ligeramente más grandes al pasar el mouse */
+}
+
+/* --- Estilos para los botones de propuesta --- */
+/* Estilos generales para ambos botones de propuesta */
+#questionButton,
+#yesButton {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.3em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    /* Para centrar el botón si está solo en una línea */
+    /* display: inline-block; */ /* Se elimina para #yesButton porque lo haremos 'block' explícitamente en el CSS */
+    vertical-align: middle;
+}
+
+#questionButton:hover,
+#yesButton:hover {
+    background-color: #d81b60;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Asegura que el botón "Sí" esté oculto por defecto y se muestre como bloque */
+#yesButton {
+    display: none; /* ¡Este es el estado inicial clave: oculto! */
+    opacity: 0; /* Para la animación de entrada */
+    transform: translateY(20px); /* Para la animación de entrada */
+    margin: 30px auto; /* Centrarlo si está solo en su línea */
+}
+
+/* Cuando el JS remueve la clase 'hidden', queremos que se muestre como un bloque */
+#yesButton:not(.hidden) {
+    display: block; /* Asegura que el botón "Sí" se muestre como un bloque y tome su propia línea */
+}
+
+
+#responseMessage {
+    margin-top: 30px;
+    font-size: 1.5em;
+    color: #e91e63;
+    font-weight: bold;
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media Queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        max-width: 95%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .image-gallery {
+        gap: 10px;
+    }
+
+    .image-gallery img {
+        width: 180px;
+        height: 130px;
+    }
+
+    .image-gallery p {
+        font-size: 0.9em;
+    }
+
+    .carousel-container {
+        height: 250px; /* Altura ajustada para móviles */
+        margin: 30px 0;
+    }
+    
+    .carousel-button {
+        font-size: 1.2em;
+        padding: 8px 12px;
+    }
+
+    .marcelos-section {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 15px;
+    }
+
+    .marcelos-section p {
+        font-size: 1em;
+    }
+
+    .marcelos-images img {
+        width: 100px; /* Más pequeñas en móviles */
+        height: 100px;
+    }
+
+    #questionButton,
+    #yesButton { /* Ajuste para ambos botones en móviles */
+        font-size: 1.1em;
+        padding: 12px 25px;
+        margin-top: 20px;
+    }
+}
